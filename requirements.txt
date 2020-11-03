@@ -2,3 +2,5 @@ django
 django-extensions
 ipython[notebook]
 arcgis
+psycopg2
+pyyaml

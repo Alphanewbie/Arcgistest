@@ -1,0 +1,11 @@
+version : '3'
+services: 
+    test :
+        build:
+            context : .
+            dockerfile : Dockerfile # 빌드할 Docker 파일 위치
+        ports:
+            - "8100:8000"
+            - "8888:8888"
+        # volumes:
+        #     - /mnt/c/Users/LeeChanwoo/AppData/Local/Programs/ArcGIS/Pro/Resources/ArcPy/arcpy:/usr/local/lib/python3.8/site-packages/arcpy

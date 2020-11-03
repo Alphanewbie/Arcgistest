@@ -11,6 +11,10 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
+import yaml
+
+stream = open('settings_data.yml', 'r')
+settings = yaml.load(stream, yaml.SafeLoader)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -23,9 +27,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '6_1w&vs7t4es)!geb*%iv3+v97+ji4^%@e+-i(oyp)6)8+i24d'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = settings['SETTING']['DEBUG']
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '*',
+]
 
 
 # Application definition
@@ -38,7 +44,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     # my app
-    
+    'arctest',
+    'interface',
     # me add extension
     'django_extensions',
 ]
@@ -79,8 +86,12 @@ WSGI_APPLICATION = 'django_arcgis.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': settings['DB']['DB_ENGINE'],
+        'NAME': settings['DB']['DB_NAME'],
+        'USER': settings['DB']['DB_USER'],
+        'PASSWORD': settings['DB']['DB_PASSWORD'],
+        'HOST': settings['DB']['DB_HOST'],
+        'PORT': settings['DB']['DB_PORT'],
     }
 }
 
